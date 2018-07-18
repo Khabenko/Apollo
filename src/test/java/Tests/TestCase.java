@@ -1,5 +1,6 @@
 package Tests;
 
+import java.io.File;
 import java.sql.DriverManager;
 import java.util.Arrays;
 import java.util.List;
@@ -13,7 +14,6 @@ import static org.junit.Assert.*;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.openqa.selenium.*;
-import org.openqa.selenium.chrome.ChromeDriver;
 import ru.yandex.qatools.allure.annotations.*;
 
 @RunWith(Parameterized.class)
@@ -43,9 +43,9 @@ public class TestCase{
     @Issue("Test-1")
     @Test
     public void testCaseP1() throws Exception {
+        screenshot();
         driver.get("http://firstbridge.io/");
-        makeScreenshot();
-        driver.get("http://firstbridge.io/");
+
 
     }
 
@@ -57,6 +57,19 @@ public class TestCase{
         if (!"".equals(verificationErrorString)) {
             fail(verificationErrorString);
         }
+    }
+
+    @Attachment(value = "Page screenshot", type = "image/png")
+    public byte[] saveScreenshot(byte[] screenShot) {
+        return screenShot;
+    }
+
+    public void screenshot() {
+        if (driver == null) {
+            return;
+        }
+        System.out.println(((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES));
+        saveScreenshot(((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES));
     }
 
     private boolean isElementPresent(By by) {
@@ -92,16 +105,12 @@ public class TestCase{
         }
     }
 
-    @Attachment(type = "image/png")
-    public byte[] makeScreenshot() {
-        return ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
-    }
 
     @Parameterized.Parameters
     public static List<Object[]> isEmptyData() {
         return Arrays.asList(new Object[][] {
-                { WebDrivers.FireFoxDriverForWindows },
-                { WebDrivers.ChromeDriverForWindows }
+                { WebDrivers.FireFoxDriverForWindows }
+          //      , { WebDrivers.ChromeDriverForWindows }
         });
     }
 }

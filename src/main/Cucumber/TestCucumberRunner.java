@@ -10,7 +10,7 @@ import org.junit.runner.RunWith;
 @RunWith(Cucumber.class)
 @CucumberOptions(
         features = "src/test/Feature",
-        glue={"StepsDefenition"},
+        glue={"src/main/Cucumber/StepsDefenition"},
         dryRun = false,
         strict = false,
         snippets = SnippetType.CAMELCASE
