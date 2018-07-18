@@ -43,10 +43,7 @@ public class TestCase{
     @Issue("Test-1")
     @Test
     public void testCaseP1() throws Exception {
-        screenshot();
         driver.get("http://firstbridge.io/");
-
-
     }
 
 
@@ -59,18 +56,6 @@ public class TestCase{
         }
     }
 
-    @Attachment(value = "Page screenshot", type = "image/png")
-    public byte[] saveScreenshot(byte[] screenShot) {
-        return screenShot;
-    }
-
-    public void screenshot() {
-        if (driver == null) {
-            return;
-        }
-        System.out.println(((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES));
-        saveScreenshot(((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES));
-    }
 
     private boolean isElementPresent(By by) {
         try {
