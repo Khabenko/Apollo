@@ -44,8 +44,14 @@ public class TestCase{
     @Test
     public void testCaseP1() throws Exception {
         driver.get("http://firstbridge.io/");
+        saveScreenshotPNG();
+        driver.get("http://firstbridge.io/");
     }
 
+    @Attachment(value = "Page screenshot", type = "image/png")
+    public byte[] saveScreenshotPNG () {
+        return ((TakesScreenshot)driver).getScreenshotAs(OutputType.BYTES);
+    }
 
     @After
     public void tearDown() throws Exception {
