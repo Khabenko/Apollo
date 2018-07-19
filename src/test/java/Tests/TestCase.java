@@ -43,15 +43,11 @@ public class TestCase{
     @Issue("Test-1")
     @Test
     public void testCaseP1() throws Exception {
-        driver.get("http://firstbridge.io/");
-        saveScreenshotPNG();
-        driver.get("http://firstbridge.io/");
+        driver.get("https://www.ukr.net/");
+        Screenshot();
+        driver.get("https://www.ukr.net/");
     }
 
-    @Attachment(value = "Page screenshot", type = "image/png")
-    public byte[] saveScreenshotPNG () {
-        return ((TakesScreenshot)driver).getScreenshotAs(OutputType.BYTES);
-    }
 
     @After
     public void tearDown() throws Exception {
@@ -101,7 +97,13 @@ public class TestCase{
     public static List<Object[]> isEmptyData() {
         return Arrays.asList(new Object[][] {
                 { WebDrivers.FireFoxDriverForWindows }
-          //      , { WebDrivers.ChromeDriverForWindows }
+    // { WebDrivers.ChromeDriverForWindows }
         });
+    }
+
+
+    @Attachment(type = "image/png")
+    public byte[] Screenshot () {
+        return ((TakesScreenshot)driver).getScreenshotAs(OutputType.BYTES);
     }
 }
